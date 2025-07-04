@@ -2,6 +2,12 @@ const accordionContent = document.querySelectorAll(".accordion-content");
 
 accordionContent.forEach((item) => {
     let button = item.querySelector("button");
+
+    // Hover to give it focus so keyboard works
+    button.addEventListener("mouseenter", () => {
+        button.focus();
+    });
+
     button.addEventListener("click", () => {
         openContent(item);
         
