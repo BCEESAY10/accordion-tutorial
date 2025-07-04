@@ -1,9 +1,25 @@
 const accordionContent = document.querySelectorAll(".accordion-content");
 
 accordionContent.forEach((item, index)=>{
-    let header = item.querySelector("header");
-    header.addEventListener("click", ()=>{
-        item.classList.toggle("is-open");
+    let button = item.querySelector("button");
+    button.addEventListener("click", () => {
+        openContent(item);
+        
+        // function to pass the index number of clicked button
+        removeOpenedContent(index); 
+    })
+
+    button.addEventListener("keydown", (e) => {
+        if(e.key === "Enter" || e.key === " "){
+            e.preventDefault();
+            openContent(item); 
+            removeOpenedContent(index); 
+        }
+    })
+})
+
+function openContent (item) {
+    item.classList.toggle("is-open");
 
         let description = item.querySelector(".accordion-content-description");
         if(item.classList.contains("is-open")){
@@ -15,10 +31,7 @@ accordionContent.forEach((item, index)=>{
             description.style.height = "0px";
             item.querySelector("i").classList.replace("fa-minus","fa-plus");
         }
-        // function to pass the index number of clicked header
-        removeOpenedContent(index); 
-    })
-})
+}
 
 function removeOpenedContent(index){
     accordionContent.forEach((item2, index2)=>{
