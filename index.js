@@ -1,45 +1,46 @@
 const accordionContent = document.querySelectorAll(".accordion-content");
 
-accordionContent.forEach((item, index)=>{
+accordionContent.forEach((item) => {
     let button = item.querySelector("button");
     button.addEventListener("click", () => {
         openContent(item);
         
         // function to pass the index number of clicked button
-        removeOpenedContent(index); 
+        removeOpenedContent(item); 
     })
 
     button.addEventListener("keydown", (e) => {
-        if(e.key === "Enter" || e.key === " "){
-            e.preventDefault();
-            openContent(item); 
-            removeOpenedContent(index); 
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openContent(item);
+          removeOpenedContent(item);
         }
-    })
+      });
+
 })
 
 function openContent (item) {
     item.classList.toggle("is-open");
 
-        let description = item.querySelector(".accordion-content-description");
-        if(item.classList.contains("is-open")){
-            // Scrollheight property return the height of
-            // an element including padding
-            description.style.height=`${description.scrollHeight}px`; 
-            item.querySelector("i").classList.replace("fa-plus","fa-minus");
-        }else{
-            description.style.height = "0px";
-            item.querySelector("i").classList.replace("fa-minus","fa-plus");
-        }
+    let description = item.querySelector(".accordion-content-description");
+    if(item.classList.contains("is-open")){
+        // Scrollheight property return the height of
+        // an element including padding
+        description.style.height=`${description.scrollHeight}px`; 
+        item.querySelector("i").classList.replace("fa-plus","fa-minus");
+    }else{
+        description.style.height = "0px";
+        item.querySelector("i").classList.replace("fa-minus","fa-plus");
+    }
 }
 
-function removeOpenedContent(index){
-    accordionContent.forEach((item2, index2)=>{
-        if(index != index2){
-            item2.classList.remove("is-open");
-            let descrip = item2.querySelector(".accordion-content-description");
+function removeOpenedContent(currentItem){
+    accordionContent.forEach((item)=>{
+        if(item !== currentItem){
+            item.classList.remove("is-open");
+            let descrip = item.querySelector(".accordion-content-description");
             descrip.style.height="0px";
-            item2.querySelector("i").classList.replace("fa-minus","fa-plus");
+            item.querySelector("i").classList.replace("fa-minus","fa-plus");
         }
     })
 }
