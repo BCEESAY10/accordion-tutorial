@@ -21,7 +21,7 @@ accordionContent.forEach((item, index)=>{
 })
 
 function removeOpenedContent(index){
-    accordionContent.forEach((item2,index2)=>{
+    accordionContent.forEach((item2, index2)=>{
         if(index != index2){
             item2.classList.remove("is-open");
             let descrip = item2.querySelector(".accordion-content-description");
